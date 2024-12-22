@@ -66,7 +66,7 @@ const sendWelcomeMessage = async (ctx) => {
           [
             {
               text: "🎮 Launch Mini App",
-              web_app: { url: "https://referral_system_ciz.vercel.app" }, // Update this URL
+              web_app: { url: "https://referral_system_ciz.vercel.app" },
             },
           ],
           [{ text: "Subscribe Channel", url: "https://t.me/cizantg" }],
@@ -74,4 +74,29 @@ const sendWelcomeMessage = async (ctx) => {
       },
     }
   );
+};
+const registerReferral = async (
+  referrerID,
+  tgUserID,
+  tgUsername,
+  isPremium
+) => {
+  try {
+    console.log(
+      `Registering referral for new user with username: ${tgUsername}`
+    );
+    await axios.put(
+      `${process.env.BACKEND_URL}/api/referrals/register/${referrerID}`,
+      {
+        referredID: tgUserID,
+        isPremium: isPremium,
+        username: tgUsername,
+      }
+    );
+    console.log(
+      `Referral registered successfully for referrerID: ${referrerID}, referredID: ${tgUserID}`
+    );
+  } catch (error) {
+    console.error("Error processing referral:", error);
+  }
 };
