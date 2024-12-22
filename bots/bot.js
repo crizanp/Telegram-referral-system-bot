@@ -100,3 +100,24 @@ const registerReferral = async (
     console.error("Error processing referral:", error);
   }
 };
+// Start the bot with webhook setup
+
+const startBot = async (app) => {
+  try {
+    const webhookInfo = await bot.telegram.getWebhookInfo();
+    if (!webhookInfo.url) {
+      await bot.telegram.setWebhook(
+        `${process.env.WEBHOOK_URL}/bot${process.env.TELEGRAM_BOT_TOKEN}`
+      );
+      console.log("Webhook set successfully.");
+    }
+
+    app.post(`/bot${process.env.TELEGRAM_BOT_TOKEN}`, (req, res) => {
+      bot.handleUpdate(req.body, res);
+    });
+
+    console.log("Bot is running and webhook is set.");
+  } catch (error) {
+    console.error("Error setting up webhook:", error.message || error);
+  }
+};
