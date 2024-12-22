@@ -121,3 +121,4 @@ const startBot = async (app) => {
     console.error("Error setting up webhook:", error.message || error);
   }
 };
+module.exports = startBot;
