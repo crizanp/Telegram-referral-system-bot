@@ -52,3 +52,26 @@ bot.start(async (ctx) => {
 
   await sendWelcomeMessage(ctx);
 });
+
+const sendWelcomeMessage = async (ctx) => {
+  await ctx.reply(
+    `
+  🚀 **Welcome bro to the tg mini apps development connect with me @cizanp** 🚀
+
+      `,
+    {
+      parse_mode: "Markdown",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "🎮 Launch Mini App",
+              web_app: { url: "https://referral_system_ciz.vercel.app" }, // Update this URL
+            },
+          ],
+          [{ text: "Subscribe Channel", url: "https://t.me/cizantg" }],
+        ],
+      },
+    }
+  );
+};
