@@ -22,6 +22,9 @@ app.use(express.json());
 app.use("/api/user-info", userInfoRoutes);
 app.use("/api/referrals", referralRoutes);
 
+// Start the bot and its webhook
+startBot(app);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
